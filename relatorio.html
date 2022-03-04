@@ -1,0 +1,780 @@
+<div id="MyWidget_${instanceId}" class="super-widget wcm-widget-class fluig-style-guide" data-params="MyWidget.instance()">
+    <script type="text/javascript" src="/fluighub/assets/js/fluighub.js"></script>
+    <script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+
+     <!-- Nav tabs -->
+     <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link nav-title active nav-close " data-toggle="tab" href="#menu_nav">Menu</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-title nav-close" data-toggle="tab" href="#contas_receber_nav">Contas a Receber</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-title nav-close" data-toggle="tab" href="#contas_pagar_nav">Contas a Pagar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-title nav-close" data-toggle="tab" href="#status_estudo_nav">Status de Estudo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-title nav-close" data-toggle="tab" href="#amostra_nav">Amostra</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-title nav-close" data-toggle="tab" href="#status_orc_nav">Status de Orçamento</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!--Navegação (Cards de Cadastro)-->
+        <div id="menu_nav" class="container tab-pane active" aria-selected="true">
+            <div class="row col-md-12">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/r-receber.png?raw=true" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Contas a Receber</b></h3>
+                            <p class="card-text p-cinza">Orçamentos Aprovados – Financeiro.</p>
+                            <button name="subject" type="button" class="btn btn-warning button-medcin" onclick="select('contas_receber_nav')">Selecionar</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/r-pagar.png?raw=true" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Contas a Pagar</b></h3>
+                            <p class="card-text p-cinza">Pedidos de Compras – Financeiro.</p>
+                            <button name="subject1" type="button" class="btn btn-warning button-medcin" onclick="select('contas_pagar_nav')">Selecionar</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/r_status.png?raw=true" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Status de Estudo</b></h3>
+                            <p class="card-text p-cinza">Filtro dos estudos e seus status.</p>
+                            <button name="subject2" type="button" class="btn btn-warning button-medcin" onclick="select('status_estudo_nav')">Selecionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/r_amostra.png?raw=true" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Amostra</b></h3>
+                            <p class="card-text p-cinza">Relatório de amostra.</p>
+                            <button name="subject2" type="button" class="btn btn-warning button-medcin" onclick="select('amostra_nav')">Selecionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 nav-close">
+                    <div class="card">
+                        <img class="card-img-top" src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/r_cronograma.png?raw=true" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Status de Orçamento</b></h3>
+                            <p class="card-text p-cinza">Filtro dos orçamentos e seus status.</p>
+                            <button name="subject2" type="button" class="btn btn-warning button-medcin" onclick="select('status_orc_nav')">Selecionar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+
+         <!--Contas a Receber-->
+        <div id="contas_receber_nav" class="container tab-pane nav-close" aria-selected="true">
+            <div class="row col-md-12">
+
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4 j-medcin-p">Relatório</h1>
+                        <p class="lead j-medcin-h1">Contas a Receber</p>
+                        <button type="button" id="exitCR" class="btn button-medcin" onclick="exit('contas_receber_nav')"><i class="fluigicon fluigicon-chevron-left icon-xs" style="color: white;"></i> Voltar</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Data de Emissão de:</label>
+                    <input id="date1" name="date1" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Até:</label>
+                    <input id="date2" name="date2" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Data de Aprovação de:</label>
+                    <input id="date3" name="date3" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Até:</label>
+                    <input id="date4" name="date4" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Número do Orçamento</label>
+                    <input id="nOrc" name="nOrc" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Cliente/Patrocinador</label>
+                    <input id="cp" name="cp" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Nome do Estudo</label>
+                    <input id="nameEst" name="nameEst" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Item</label>
+                    <input id="item" name="item" type="text" class="form-control">
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="form-group col-md-1">
+                    <button id="filtrar" class="btn btn-success button-filter" onclick="receberFilter()"><i class="fluigicon fluigicon-filter icon-xs" style="color: white;"></i> Filtrar</button>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <button id="limpar" class="btn btn-danger" onclick="receberClear()"> Limpar</button>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+                <hr>
+
+                <div id="print">
+
+                    <img src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/relat%C3%B3rio%20-%20contas%20a%20receber.png?raw=true" style="width: 100%;">
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tbCR1" class="table table-sm" id="tbCR1" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tbCR2" class="table table-sm" id="tbCR2" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="form-group col-md-3">
+                        <label>Extrato Total dos Orçamentos</label>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="form-group col-md-3">
+                        <label for="orcEnc">Orçamento(s) encontrado(s):</label>
+                        <input name="orcEnc" type="text" class="invisible-input" id="orcEnc" readonly>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <hr>
+
+                    <div class="form-group col-md-3">
+                        <label for="vsD">Valor s/ Desconto</label>
+                        <input name="vsD" type="text" class="invisible-input" id="vsD" readonly>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="vD">Desconto</label>
+                        <input name="vD" type="text" class="invisible-input" id="vD" readonly>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="vDp">Desconto(%)</label>
+                        <input name="vDp" type="text" class="invisible-input" id="vDp" readonly>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="vcD">Valor c/ Desconto</label>
+                        <input name="vcD" type="text" class="invisible-input" id="vcD" readonly>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+
+                </div>
+
+                <label>Exportar Relatório</label>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-1">
+                    <button id="pdf" class="btn btn-danger btn-pdf" onclick="printDiv('print')">PDF</button>
+                </div>
+
+                <div class="form-group col-md-1">
+                    <button id="xlsx" class="btn btn-success" onclick="ExportToExcel('tbCR1', 'tbCR2')">Planilha</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--Contas a Pagar-->
+        <div id="contas_pagar_nav" class="container tab-pane nav-close" aria-selected="true">
+            <div class="row col-md-12">
+
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4 j-medcin-p">Relatório</h1>
+                        <p class="lead j-medcin-h1">Contas a Pagar</p>
+                        <button type="button" class="btn button-medcin" onclick="exit('contas_pagar_nav')"><i class="fluigicon fluigicon-chevron-left icon-xs" style="color: white;"></i> Voltar</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label>De</label>
+                    <input id="dateEm" name="dateEm" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Até</label>
+                    <input id="dateEm2" name="dateEm2" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Nº da Solicitação de Compra</label>
+                    <input id="nSC" name="nSC" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Gestor Aprovador</label>
+                    <input id="gestorA" name="gestorA" type="text" class="form-control">
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="form-group col-md-1">
+                    <button id="filtrar" class="btn btn-success button-filter" onclick="pagarFilter()"><i class="fluigicon fluigicon-filter icon-xs" style="color: white;"></i> Filtrar</button>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <button id="limpar" class="btn btn-danger" onclick="pagarClear()"> Limpar</button>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+                <hr>
+
+                <div id="print2">
+
+                    <img src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/relat%C3%B3rio%20-%20contas%20a%20pagar.png?raw=true" style="width: 100%;">
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tbCP1" class="table table-sm" id="tbCP1" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tbCP2" class="table table-sm" id="tbCP2" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="form-group col-md-3">
+                        <label>Extrato Total dos Orçamentos</label>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <hr>
+
+                    <div class="form-group col-md-3">
+                        <label for="buscSoli">Solicitação(ões) encontrado(s):</label>
+                        <input name="buscSoli" type="text" class="invisible-input" id="buscSoli" readonly>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="totalAp">R$ Total Aprovado</label>
+                        <input name="totalAp" type="text" class="invisible-input" id="totalAp" readonly>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+
+                </div>
+
+                <label>Exportar Relatório</label>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-1">
+                    <button id="pdf2" class="btn btn-danger btn-pdf" onclick=" printDiv('print2')">PDF</button>
+                </div>
+
+                <div class="form-group col-md-1">
+                    <button id="xlsx2" class="btn btn-success" onclick="ExportToExcel('tbCP1', 'tbCP2')">Planilha</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Status de Estudo-->
+        <div id="status_estudo_nav" class="container tab-pane nav-close" aria-selected="true">
+            <div class="row col-md-12">
+
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4 j-medcin-p">Relatório</h1>
+                        <p class="lead j-medcin-h1">Status de Estudo</p>
+                        <button type="button" class="btn button-medcin" onclick="exit('status_estudo_nav')"><i class="fluigicon fluigicon-chevron-left icon-xs" style="color: white;"></i> Voltar</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Cliente/Patrocinador</label>
+                    <input id="CP" name="CP" type="text" class="form-control">
+                </div>
+
+                
+                <div class="col-md-3">
+                    <label>Número de Estudo</label>
+                    <input id="nEstudo" name="nEstudo" type="text" class="form-control">
+                </div>
+                
+                <div class="col-md-3 nav-close">
+                    <label>Status do Orçamento</label>
+                    <select id="statusOrc" name="statusOrc" type="text" class="form-control">
+                        <option value="">Selecione...</option>
+                        <option value="Aprovado">Finalizado</option>
+                        <option value="Em Análise">Atrazado</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-3 nav-close">
+                    <label>Status Amostra</label>
+                    <select id="statusAmt" name="statusAmt" type="text" class="form-control">
+                        <option value="">Selecione...</option>
+                        <option value="Finalizado">Finalizado</option>
+                        <option value="Atrazado">Atrasado</option>
+                        <option value="Em Aberto">Em Aberto</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Setor Responsável</label>
+                    <input id="setorResp" name="setorResp" type="text" class="form-control">
+                </div>
+                
+                <div class="col-md-3">
+                    <label>Status do Projeto</label>
+                    <select id="statusProj" name="statusProj" type="text" class="form-control">
+                        <option value="">Selecione...</option>
+                        <option value="Finalizado">Finalizado</option>
+                        <option value="Em Aberto">Em Aberto</option>
+                    </select>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+                <hr>
+                
+                <div class="col-md-4">
+                    <label>Nº Orçamento</label>
+                    <div class="input-group">
+                        <input id="nOD" name="nOD" type="text" class="form-control" placeholder="De">
+                        <span class="input-group-addon"><i class="flaticon flaticon-link-broken icon-sm"></i></span>
+                        <input id="nOA" name="nOA" type="text" class="form-control" placeholder="Até">
+                    </div>
+                </div>
+
+                <div class="col-md-4 nav-close">
+                    <label>Período - Prazo do Estudo</label>
+                    <div class="input-group">
+                        <input id="pD" name="pD" type="date" class="form-control">
+                        <span class="input-group-addon">Até</span>
+                        <input id="pA" name="pA" type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="form-group col-md-1">
+                    <button id="filtrar" class="btn btn-success button-filter" onclick="estudoFilter()"><i class="fluigicon fluigicon-filter icon-xs" style="color: white;"></i> Filtrar</button>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <button id="limpar" class="btn btn-danger" onclick="estudoClear()"> Limpar</button>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+                <hr>
+
+                <div id="print3">
+
+                    <img src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/relat%C3%B3rio%20-%20status%20de%20estudo.png?raw=true" style="width: 100%;">
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tbSE1" class="table table-sm" id="tbSE1" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tbSE2" class="table table-sm" id="tbSE2" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <label>Exportar Relatório</label>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-1">
+                    <button id="pdf" class="btn btn-danger btn-pdf" onclick="printDiv('print3')">PDF</button>
+                </div>
+
+                <div class="form-group col-md-1">
+                    <button id="xlsx" class="btn btn-success" onclick="ExportToExcel('tbSE1', 'tbSE2')">Planilha</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Amostra-->
+        <div id="amostra_nav" class="container tab-pane nav-close" aria-selected="true">
+
+            <div class="row col-md-12">
+
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4 j-medcin-p">Relatório</h1>
+                        <p class="lead j-medcin-h1">Amostra</p>
+                        <button type="button" class="btn button-medcin" onclick="exit('amostra_nav')"><i class="fluigicon fluigicon-chevron-left icon-xs" style="color: white;"></i> Voltar</button>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Cliente/Patrocinador</label>
+                    <input id="clientP" name="clientP" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-4">
+                    <label>Nº Orçamento</label>
+                    <input id="nOrcAmt" name="nOrcAmt" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-4">
+                    <label>Número de Estudo</label>
+                    <input id="numbEst" name="nEstudo" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-4">
+                    <label>Código da Amostra</label>
+                    <input id="codAmt" name="codAmt" type="text" class="form-control">
+                </div>
+                
+                <div class="col-md-4">
+                    <label>FIP</label>
+                    <select id="fip" name="fip" type="text" class="form-control">
+                        <option value="">Selecione...</option>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-4">
+                    <label>Fórmula</label>
+                    <select id="formula" name="formula" type="text" class="form-control">
+                        <option value="">Selecione...</option>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+                <hr>
+                
+                <div class="col-md-6">
+                    <label>Período de Recebimento</label>
+                    <div class="input-group">
+                        <input id="pRD" name="pR" type="date" class="form-control">
+                        <span class="input-group-addon">Até</span>
+                        <input id="pRA" name="pRA" type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="form-group col-md-1">
+                    <button id="filtrar" class="btn btn-success button-filter" onclick="amtFilter()"><i class="fluigicon fluigicon-filter icon-xs" style="color: white;"></i> Filtrar</button>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <button id="limpar" class="btn btn-danger" onclick="amtClear()"> Limpar</button>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+                <hr>
+
+                <div id="printAMT">
+
+                    <img src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/relat%C3%B3rio%20-%20amostra.png?raw=true" style="width: 100%;">
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tbAMT1" class="table table-sm" id="tbAMT1" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tbAMT2" class="table table-sm" id="tbAMT2" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <label>Exportar Relatório</label>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-1">
+                    <button id="pdf" class="btn btn-danger btn-pdf" onclick="printDiv('printAMT')">PDF</button>
+                </div>
+
+                <div class="form-group col-md-1">
+                    <button id="xlsx" class="btn btn-success" onclick="ExportToExcel('tbATM1', 'tbATM2')">Planilha</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--Status Orçamento-->
+        <div id="status_orc_nav" class="container tab-pane nav-close" aria-selected="true">
+            <div class="row col-md-12">
+
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4 j-medcin-p">Relatório</h1>
+                        <p class="lead j-medcin-h1">Status de Orçamento</p>
+                        <button type="button" class="btn button-medcin" onclick="exit('status_orc_nav')"><i class="fluigicon fluigicon-chevron-left icon-xs" style="color: white;"></i> Voltar</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Data de Emissão</label>
+                    <input id="dateEmSO" name="dateEmSO" type="date" class="form-control">
+                </div>
+
+                <label>Até</label>
+
+                <div class="col-md-3">
+                    <input id="dateEmSO2" name="dateEmSO2" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Data da Aprovação</label>
+                    <input id="dateApSO" name="dateApSO" type="date" class="form-control">
+                </div>
+
+                <label>Até</label>
+
+                <div class="col-md-3">
+                    <input id="dateApSO2" name="dateApSO2" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Nº Orçamento/Ensaio</label>
+                    <input id="nOE" name="nOE" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Cliente/Patrocinador</label>
+                    <input id="CPSO" name="CPSO" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Nome do Estudo</label>
+                    <input id="nomeEstudo" name="nomeEstudo" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Setor Responsável</label>
+                    <input id="setorRespSO" name="setorRespSO" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Item</label>
+                    <input id="itemSO" name="itemSO" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Status Orçamento</label>
+                    <input id="statusOrcSO" name="statusOrcSO" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Responsável pelo Orçamento</label>
+                    <input id="respOrc" name="respOrc" type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Valores Aprovados</label>
+                    <input id="valoresAp" name="valoresAp" type="date" class="form-control">
+                </div>
+
+                <label>Até</label>
+
+                <div class="col-md-3">
+                    <input id="valoresAp2" name="valoresAp2" type="date" class="form-control">
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="form-group col-md-1">
+                    <button id="filtrar" class="btn btn-success button-filter" onclick=""><i class="fluigicon fluigicon-filter icon-xs" style="color: white;"></i> Filtrar</button>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <button id="limpar" class="btn btn-danger" onclick=""> Limpar</button>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+                <hr>
+
+                <div id="print">
+
+                    <img src="https://github.com/Emanuel-developer992/imagens/blob/main/Medcin/relat%C3%B3rio%20-%20status%20de%20or%C3%A7amento.png?raw=true" style="width: 100%;">
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tabelaAddComercial" class="table table-sm" id="tabelaAddComercial" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Nº Orçamento/Ensaio</th>
+                                    <th>Versão</th>
+                                    <th>Patrocinador</th>
+                                    <th>Nome do Estudo</th>
+                                    <th>Status do Orçamento</th>
+                                    <th>Setor Responsável</th>
+                                    <th>Item</th>
+                                    <th>Data de Aprovação</th>
+                                    <th>Tempo de Aprovação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" id="tb_dataSO" name="tb_dataSO" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_nOE" name="tb_nOE" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_versaoSO" name="tb_versaoSO" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_patrocSO" name="tb_patrocSO" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_nomeEst" name="tb_nomeEst" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_statusOrcSO" name="tb_statusOrcSO" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_setorRespSO" name="tb_setorRespSO" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_itemSO" name="tb_itemSO" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_dataAp" name="tb_dataAp" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_tempoAp" name="tb_tempoAp" class="invisible-input" readonly></input></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <div class="table-responsive col-md-12">
+                        <table tablename="tabelaAddComercial" class="table table-sm" id="tabelaAddComercial" noaddbutton="true" nodeletebutton="true">
+                            <thead>
+                                <tr>
+                                    <th>R$ Total Orçamento S/ Desconto</th>
+                                    <th>R$ Total Desconto Aplicado</th>
+                                    <th>R$ Total Aprovado</th>
+                                    <th>Forma de Pagamento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" id="tb_totalOSD" name="tb_totalOSD" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_totalDA" name="tb_totalDA" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_totalAp" name="tb_totalAp" class="invisible-input" readonly></input></td>
+                                    <td><input type="text" id="tb_formPagSO" name="tb_formPagSO" class="invisible-input" readonly></input></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <label>Exportar Relatório</label>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-1">
+                    <button id="pdf" class="btn btn-danger btn-pdf" onclick="">PDF</button>
+                </div>
+
+                <div class="form-group col-md-1">
+                    <button id="xlsx" class="btn btn-success" onclick="">Planilha</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="jquery.btechco.excelexport.js"></script>
+    <script src="jquery.base64.js"></script>
+    <script type="text/javascript">
+        function ExportToExcel(tb1, tb2){
+               var htmltable= document.getElementById(tb1);
+               var htmltable2= document.getElementById(tb2);
+               var html = htmltable.outerHTML;
+               var html2 = htmltable2.outerHTML;
+               window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html) + encodeURIComponent(html2));
+            }
+        </script>
+</div>
